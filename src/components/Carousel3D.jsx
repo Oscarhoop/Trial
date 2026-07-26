@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Camera } from 'lucide-react';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
 const Carousel3D = ({ images = [] }) => {
@@ -98,7 +99,7 @@ const Carousel3D = ({ images = [] }) => {
                                 <div className="w-full h-full bg-gradient-to-br from-wine/40 to-midnight/60 flex items-center justify-center relative group">
                                     {/* Placeholder for actual image */}
                                     <div className="absolute inset-0 bg-gradient-to-br from-gold/20 to-transparent" />
-                                    <span className="text-6xl z-10">📸</span>
+                                    <Camera className="w-16 h-16 text-white/50 z-10" />
 
                                     {/* Caption overlay */}
                                     <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-midnight/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -161,7 +162,7 @@ const Carousel3D = ({ images = [] }) => {
                         >
                             <div className="bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border-2 border-gold/50 p-4">
                                 <div className="aspect-[4/5] bg-gradient-to-br from-wine/40 to-midnight/60 rounded-2xl flex items-center justify-center">
-                                    <span className="text-9xl">📸</span>
+                                    <Camera className="w-32 h-32 text-white/20" />
                                 </div>
                                 <p className="text-center text-2xl font-serif mt-4 text-white">
                                     {selectedImage.caption}

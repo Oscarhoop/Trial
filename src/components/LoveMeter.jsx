@@ -63,19 +63,18 @@ const LoveMeter = () => {
         },
         {
             icon: Sparkles,
-            label: 'Distance Factor',
-            value: 0,
+            label: 'Joy Factor',
+            value: 100,
             maxValue: 100,
-            color: 'from-gray-400 to-gray-600',
-            glowColor: 'rgba(156, 163, 175, 0.5)',
+            color: 'from-pink-400 to-rose-500',
+            glowColor: 'rgba(244, 114, 182, 0.5)',
             suffix: '%',
-            description: 'Love > Distance',
-            inverse: true
+            description: 'Pure Happiness'
         }
     ];
 
     function calculateDaysTogether() {
-        const startDate = new Date('2023-09-22');
+        const startDate = new Date('2026-02-24');
         const today = new Date();
         const diffTime = Math.abs(today - startDate);
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -95,7 +94,7 @@ const LoveMeter = () => {
                     Our Love Statistics
                 </h2>
                 <p className="text-center text-gray-400 mb-16 text-lg">
-                    Some things just can't be measured... but here's our best attempt 💕
+                    Some things just can't be measured... but here's our best attempt
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -184,7 +183,7 @@ const LoveMeter = () => {
                 >
                     <div className="inline-block bg-gradient-to-r from-rose-500/20 to-purple-500/20 backdrop-blur-md border border-white/20 rounded-full px-8 py-4">
                         <p className="text-white font-serif text-lg">
-                            💕 Final Verdict: <span className="text-gold font-bold">Absolutely Perfect for Each Other</span> 💕
+                            Final Verdict: <span className="text-gold font-bold">Absolutely Perfect for Each Other</span>
                         </p>
                     </div>
                 </motion.div>

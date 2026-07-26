@@ -78,7 +78,7 @@ function App() {
           </motion.div>
 
           <motion.div variants={sectionVariants}>
-            <LoveCounter startDate="2023-09-22" />
+            <LoveCounter startDate="2026-02-24" />
           </motion.div>
 
           <motion.div variants={sectionVariants}>

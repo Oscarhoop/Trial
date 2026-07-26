@@ -111,7 +111,7 @@ const WishesWall = () => {
                         Our Wishes Wall
                     </h2>
                     <p className="text-gray-400 text-lg">
-                        Every star holds a dream we'll make come true together ✨
+                        Every star holds a dream we'll make come true together
                     </p>
                 </motion.div>
 
@@ -267,7 +267,7 @@ const WishesWall = () => {
                     className="text-center mt-12"
                 >
                     <p className="text-gray-400 italic">
-                        Hover over each star to reveal our dreams for the future 💫
+                        Hover over each star to reveal our dreams for the future
                     </p>
                 </motion.div>
             </div>

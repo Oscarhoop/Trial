@@ -12,6 +12,7 @@ const photos = [
 
 const Gallery = () => {
     const [selectedId, setSelectedId] = useState(null);
+    const [hoveredIndex, setHoveredIndex] = useState(2); // Default to middle expanded
 
     const prev = (e) => {
         e.stopPropagation();
@@ -24,107 +25,190 @@ const Gallery = () => {
     };
 
     return (
-        <section className="py-20 px-4 relative z-10">
-            <h2 className="text-3xl font-serif text-center mb-12 text-white">The Beauty That Is You</h2>
+        <section className="py-24 px-4 relative z-10 w-full overflow-hidden">
+            <h2 className="text-3xl md:text-5xl font-serif text-center mb-16 text-white tracking-wider drop-shadow-lg">
+                The Beauty That Is You
+            </h2>
 
-            <div
-                style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-                    gap: '16px',
-                    maxWidth: '1200px',
-                    margin: '0 auto',
-                }}
-            >
-                {photos.map((src, index) => (
-                    <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.08, duration: 0.5 }}
-                        className="relative group cursor-pointer overflow-hidden rounded-xl border border-white/10"
-                        style={{ aspectRatio: '3 / 4', background: '#1a1a2e' }}
-                        onClick={() => setSelectedId(index)}
-                    >
-                        <img
-                            src={src}
-                            alt={`Photo ${index + 1}`}
-                            style={{
-                                width: '100%',
-                                height: '100%',
-                                objectFit: 'cover',
-                                objectPosition: 'center top',
-                                display: 'block',
-                                transition: 'transform 0.6s ease',
-                            }}
-                            className="group-hover:scale-105"
-                            loading="lazy"
-                        />
-                        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </motion.div>
-                ))}
+            {/* Expanding Cards Layout */}
+            <div className="flex w-full max-w-7xl mx-auto h-[60vh] md:h-[70vh] gap-2 md:gap-4 px-2">
+                {photos.map((src, index) => {
+                    const isHovered = hoveredIndex === index;
+                    
+                    return (
+                        <motion.div
+                            key={index}
+                            className={`relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+                                isHovered ? 'w-[60%] md:w-[50%]' : 'w-[10%] md:w-[12.5%]'
+                            }`}
+                            onMouseEnter={() => setHoveredIndex(index)}
+                            onClick={() => setSelectedId(index)}
+                            layout
+                        >
+                            {/* The Image */}
+                            <img
+                                src={src}
+                                alt={`Memory ${index + 1}`}
+                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out"
+                                style={{ 
+                                    imageOrientation: 'from-image',
+                                    transform: isHovered ? 'scale(1.05)' : 'scale(1)'
+                                }}
+                                loading="lazy"
+                            />
+                            
+                            {/* Dark Gradient Overlay */}
+                            <div 
+                                className={`absolute inset-0 transition-opacity duration-700 ${
+                                    isHovered 
+                                        ? 'bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-100' 
+                                        : 'bg-black/40 opacity-100'
+                                }`} 
+                            />
+
+                            {/* Info inside the expanded card */}
+                            <div 
+                                className={`absolute bottom-0 left-0 right-0 p-6 md:p-8 flex flex-col justify-end h-full transition-all duration-700 ${
+                                    isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                                }`}
+                            >
+                                <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center mb-4 border border-white/30">
+                                    <span className="text-white font-serif text-xl">{index + 1}</span>
+                                </div>
+                                <h3 className="text-white text-2xl md:text-4xl font-serif tracking-wide truncate">
+                                    {['Flawless', 'Ethereal', 'Breathtaking', 'Radiant', 'Stunning'][index]}
+                                </h3>
+                            </div>
+                        </motion.div>
+                    );
+                })}
             </div>
 
+            {/* Lightbox */}
             <AnimatePresence>
                 {selectedId !== null && (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 backdrop-blur-md"
+                        style={{
+                            position: 'fixed',
+                            inset: 0,
+                            zIndex: 9999,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            background: 'rgba(0,0,0,0.96)',
+                            padding: '16px',
+                            backdropFilter: 'blur(12px)',
+                        }}
                         onClick={() => setSelectedId(null)}
                     >
                         {/* Close */}
                         <button
-                            className="absolute top-4 right-4 text-white hover:text-rose-400 transition-colors z-10"
                             onClick={() => setSelectedId(null)}
+                            style={{
+                                position: 'absolute',
+                                top: 16,
+                                right: 16,
+                                background: 'rgba(255,255,255,0.1)',
+                                border: 'none',
+                                borderRadius: '50%',
+                                width: 44,
+                                height: 44,
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                                color: '#fff',
+                                zIndex: 10,
+                                transition: 'background 0.2s',
+                            }}
                         >
-                            <X className="w-8 h-8" />
+                            <X size={22} />
                         </button>
 
                         {/* Prev */}
                         <button
-                            className="absolute left-4 text-white hover:text-rose-400 transition-colors z-10"
                             onClick={prev}
+                            style={{
+                                position: 'absolute',
+                                left: 16,
+                                background: 'rgba(255,255,255,0.1)',
+                                border: 'none',
+                                borderRadius: '50%',
+                                width: 48,
+                                height: 48,
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                                color: '#fff',
+                                zIndex: 10,
+                            }}
                         >
-                            <ChevronLeft className="w-10 h-10" />
+                            <ChevronLeft size={26} />
                         </button>
 
-                        {/* Image */}
+                        {/* Full-res image */}
                         <motion.img
                             key={selectedId}
                             src={photos[selectedId]}
                             alt={`Photo ${selectedId + 1}`}
                             style={{
-                                maxWidth: '90vw',
-                                maxHeight: '90vh',
+                                maxWidth: '88vw',
+                                maxHeight: '88vh',
                                 objectFit: 'contain',
                                 borderRadius: '12px',
-                                boxShadow: '0 25px 60px rgba(0,0,0,0.8)',
+                                boxShadow: '0 30px 80px rgba(0,0,0,0.9)',
+                                imageOrientation: 'from-image',
                             }}
-                            initial={{ scale: 0.85, opacity: 0 }}
+                            initial={{ scale: 0.88, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
-                            exit={{ scale: 0.85, opacity: 0 }}
-                            transition={{ duration: 0.3 }}
+                            exit={{ scale: 0.88, opacity: 0 }}
+                            transition={{ duration: 0.25 }}
                             onClick={(e) => e.stopPropagation()}
                         />
 
                         {/* Next */}
                         <button
-                            className="absolute right-4 text-white hover:text-rose-400 transition-colors z-10"
                             onClick={next}
+                            style={{
+                                position: 'absolute',
+                                right: 16,
+                                background: 'rgba(255,255,255,0.1)',
+                                border: 'none',
+                                borderRadius: '50%',
+                                width: 48,
+                                height: 48,
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                                color: '#fff',
+                                zIndex: 10,
+                            }}
                         >
-                            <ChevronRight className="w-10 h-10" />
+                            <ChevronRight size={26} />
                         </button>
 
                         {/* Counter */}
-                        <div className="absolute bottom-4 text-white/60 text-sm">
+                        <div
+                            style={{
+                                position: 'absolute',
+                                bottom: 20,
+                                color: 'rgba(255,255,255,0.5)',
+                                fontSize: '13px',
+                                letterSpacing: '0.1em',
+                            }}
+                        >
                             {selectedId + 1} / {photos.length}
                         </div>
                     </motion.div>
                 )}
             </AnimatePresence>
+
+
         </section>
     );
 };

@@ -52,7 +52,7 @@ const Closing = () => {
                         repeatDelay: 1
                     }}
                 >
-                    💕
+                    ❤️
                 </motion.div>
             </motion.div>
         </section>

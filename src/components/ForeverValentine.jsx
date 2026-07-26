@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import Card from './ui/Card';
 import Button from './ui/Button';
+import { Heart, Sparkles } from 'lucide-react';
 
 const ForeverValentine = () => {
     const [noPosition, setNoPosition] = useState({ x: 0, y: 0 });
@@ -57,11 +58,13 @@ const ForeverValentine = () => {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                         >
-                            <h2 className="text-3xl md:text-4xl font-serif mb-6 text-white">
-                                Will You Be My Forever Valentine? 💖
+                            <h2 className="text-3xl md:text-4xl font-serif mb-6 text-white flex items-center justify-center gap-3">
+                                <Sparkles className="w-8 h-8 text-rose-400" />
+                                Are You The Most Amazing Girlfriend Ever?
+                                <Sparkles className="w-8 h-8 text-rose-400" />
                             </h2>
                             <p className="text-gray-300 mb-8 text-lg">
-                                Not just for today, but for every day after...
+                                There's only one right answer to this...
                             </p>
 
                             {noAttempts > 3 && (
@@ -70,16 +73,16 @@ const ForeverValentine = () => {
                                     animate={{ opacity: 1, y: 0 }}
                                     className="text-rose-400 mb-4 italic"
                                 >
-                                    The "No" button is shy... maybe that's a sign? 😏
+                                    The "No" button knows you're lying...
                                 </motion.p>
                             )}
 
                             <div className="flex gap-6 justify-center items-center relative h-24">
                                 <Button
                                     onClick={handleYesClick}
-                                    className="bg-rose-600 hover:bg-rose-700 border-rose-500 text-xl px-8 py-4"
+                                    className="bg-rose-600 hover:bg-rose-700 border-rose-500 text-xl px-8 py-4 flex items-center gap-2"
                                 >
-                                    Yes! 💕
+                                    Yes! <Heart className="w-5 h-5 fill-current" />
                                 </Button>
 
                                 <motion.div
@@ -104,17 +107,17 @@ const ForeverValentine = () => {
                             className="space-y-6"
                         >
                             <motion.div
-                                animate={{ rotate: [0, 10, -10, 10, 0] }}
+                                animate={{ scale: [1, 1.2, 1], rotate: [0, 10, -10, 10, 0] }}
                                 transition={{ duration: 0.5, repeat: 2 }}
-                                className="text-8xl"
+                                className="flex justify-center mb-6"
                             >
-                                🎉
+                                <Heart className="w-24 h-24 text-rose-500 fill-rose-500" />
                             </motion.div>
                             <h2 className="text-4xl md:text-5xl font-serif text-rose-400">
-                                I Knew You'd Say Yes!
+                                Happy Girlfriend's Day!
                             </h2>
                             <p className="text-xl text-gray-300">
-                                You've just made me the happiest person alive. Forever starts now. ❤️
+                            You really are the absolute best, today and always.
                             </p>
                         </motion.div>
                     )}
