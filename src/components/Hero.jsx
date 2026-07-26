@@ -15,7 +15,7 @@ const Hero = () => {
             >
                 <h1 className="text-5xl md:text-7xl font-serif text-white mb-6 leading-tight drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">
                     <TypewriterText
-                        text="Shazzy,"
+                        text="Tina,"
                         speed={100}
                         delay={1000}
                         showCursor={false}
