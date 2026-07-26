@@ -15,7 +15,7 @@ const LoveLetter = () => {
                     <h2 className="text-3xl md:text-4xl font-serif mb-8 text-white/90">My Heart's Truth</h2>
                     <div className="space-y-6 text-lg md:text-xl text-gray-300 leading-relaxed font-light tracking-wide font-serif">
                         <p>
-                            Shazzy, from the moment we started this journey on September 22nd, everything changed. You became the melody in my quiet moments and the spark in my darkest days.
+                            Tina, from the moment we started this journey on September 22nd, everything changed. You became the melody in my quiet moments and the spark in my darkest days.
                         </p>
                         <p>
                             I don't just love you for who you are, but for who I am when I'm with you. You make me want to be better, to dream bigger, and to love harder. Even with the miles between Nyari and Thika, you feel closer to me than my own heartbeat.
