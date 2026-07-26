@@ -15,8 +15,8 @@ const MusicPlayer = () => {
                 id="background-music"
                 width="0"
                 height="0"
-                src="https://www.youtube.com/embed/iEIG0_wwTHg?autoplay=1&mute=0&loop=1&playlist=iEIG0_wwTHg&controls=0&showinfo=0&modestbranding=1"
-                title="Background Music"
+                src="https://www.youtube.com/embed/9rlW2rUzyn0?autoplay=1&mute=0&loop=1&playlist=9rlW2rUzyn0&controls=0&showinfo=0&modestbranding=1"
+                title="Yebba's Heartbreak"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 style={{ position: 'absolute', top: '-9999px', left: '-9999px' }}
