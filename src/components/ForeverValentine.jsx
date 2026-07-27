@@ -113,11 +113,11 @@ const ForeverValentine = () => {
                             >
                                 <Heart className="w-24 h-24 text-rose-500 fill-rose-500" />
                             </motion.div>
-                            <h2 className="text-4xl md:text-5xl font-serif text-rose-400">
-                                Happy Girlfriend's Day!
+                            <h2 className="text-4xl md:text-5xl font-serif text-white">
+                                Of course you are.
                             </h2>
-                            <p className="text-xl text-gray-300">
-                            You really are the absolute best, today and always.
+                            <p className="text-xl text-gray-300 font-serif italic">
+                                There was never any doubt, baby. ❤️
                             </p>
                         </motion.div>
                     )}

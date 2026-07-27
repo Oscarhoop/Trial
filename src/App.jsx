@@ -8,7 +8,6 @@ import Gallery from './components/Gallery';
 import LoveCounter from './components/LoveCounter';
 import MemoryTimeline from './components/MemoryTimeline';
 import ReasonsCarousel from './components/ReasonsCarousel';
-import ForeverValentine from './components/ForeverValentine';
 import WishesWall from './components/WishesWall';
 import FloatingHearts from './components/FloatingHearts';
 import ParticleSystem from './components/ParticleSystem';
@@ -92,10 +91,6 @@ function App() {
 
           <motion.div variants={sectionVariants}>
             <WishesWall />
-          </motion.div>
-
-          <motion.div variants={sectionVariants}>
-            <ForeverValentine />
           </motion.div>
 
           <motion.div variants={sectionVariants}>
