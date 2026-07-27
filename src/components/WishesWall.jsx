@@ -37,7 +37,7 @@ const WishesWall = () => {
             id: 4,
             icon: Camera,
             title: 'More Memories Together',
-            wish: 'Endless photos of us — laughing, loving, living every beautiful moment side by side',
+            wish: 'Endless photos of us laughing, loving, living every beautiful moment side by side',
             color: 'from-purple-400 to-pink-500',
             position: { top: '60%', left: '65%' },
             size: 'large'
@@ -239,42 +239,29 @@ const WishesWall = () => {
                             </motion.div>
                         );
                     })}
+                    {/* Selected wish — centered overlay inside the constellation */}
+                    <AnimatePresence mode="wait">
+                        {selectedWish && (
+                            <motion.div
+                                key={selectedWish.id}
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.9 }}
+                                transition={{ duration: 0.2 }}
+                                className="absolute inset-0 flex items-center justify-center pointer-events-none z-20"
+                            >
+                                <div className={`bg-black/60 backdrop-blur-xl border border-white/20 rounded-3xl px-8 py-6 max-w-sm text-center shadow-[0_0_60px_rgba(212,175,55,0.15)]`}>
+                                    <p className={`text-xs font-semibold tracking-widest uppercase mb-2 bg-gradient-to-r ${selectedWish.color} bg-clip-text text-transparent`}>
+                                        {selectedWish.title}
+                                    </p>
+                                    <p className="text-white text-lg leading-relaxed font-serif italic">
+                                        {selectedWish.wish}
+                                    </p>
+                                </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
-
-                {/* Selected wish display */}
-                <AnimatePresence mode="wait">
-                    {selectedWish && (
-                        <motion.div
-                            key={selectedWish.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            className="mt-8 text-center"
-                        >
-                            <div className={`inline-block bg-gradient-to-br ${selectedWish.color} bg-opacity-20 backdrop-blur-xl border border-white/20 rounded-3xl px-8 py-6 max-w-2xl`}>
-                                <h3 className="text-2xl font-serif text-white mb-3">
-                                    {selectedWish.title}
-                                </h3>
-                                <p className="text-gray-200 text-lg leading-relaxed">
-                                    {selectedWish.wish}
-                                </p>
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-
-                {/* Call to action */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 1.5 }}
-                    className="text-center mt-12"
-                >
-                    <p className="text-gray-400 italic">
-                        Hover over each star to reveal our dreams for the future
-                    </p>
-                </motion.div>
             </div>
         </section>
     );
