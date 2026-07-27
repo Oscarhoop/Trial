@@ -5,7 +5,7 @@ import { Music, Play, Pause, Volume2, VolumeX } from 'lucide-react';
 const MusicPlayer = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
-    const [isExpanded, setIsExpanded] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(true);
     const iframeRef = useRef(null);
 
     const songTitle = "Yebba's Heartbreak";
