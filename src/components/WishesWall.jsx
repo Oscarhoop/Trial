@@ -9,8 +9,8 @@ const WishesWall = () => {
         {
             id: 1,
             icon: Heart,
-            title: 'First Real Date',
-            wish: 'To finally hold your hand in person and see your smile up close',
+            title: 'Our Anniversary',
+            wish: 'Celebrating every year together, each one deeper and more beautiful than the last',
             color: 'from-rose-400 to-pink-500',
             position: { top: '15%', left: '20%' },
             size: 'large'
@@ -36,8 +36,8 @@ const WishesWall = () => {
         {
             id: 4,
             icon: Camera,
-            title: 'First Photoshoot',
-            wish: 'Fill our gallery with photos of us - laughing, loving, living',
+            title: 'More Memories Together',
+            wish: 'Endless photos of us — laughing, loving, living every beautiful moment side by side',
             color: 'from-purple-400 to-pink-500',
             position: { top: '60%', left: '65%' },
             size: 'large'

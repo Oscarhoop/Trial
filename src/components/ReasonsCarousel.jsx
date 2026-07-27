@@ -5,7 +5,7 @@ import Card from './ui/Card';
 
 const reasons = [
     "Your smile lights up my darkest days.",
-    "You make 2026 feel like it's already here.",
+    "You make 2026 feel like it's already ours.",
     "You are my best friend and my soulmate.",
     "The way you laugh at my bad jokes.",
     "Your kindness makes the world softer.",
@@ -17,7 +17,6 @@ const reasons = [
 const ReasonsCarousel = () => {
     const [index, setIndex] = useState(0);
     const [direction, setDirection] = useState(1);
-    const [isPaused, setIsPaused] = useState(false);
     const intervalRef = useRef(null);
 
     const startInterval = () => {
@@ -32,14 +31,6 @@ const ReasonsCarousel = () => {
         startInterval();
         return () => clearInterval(intervalRef.current);
     }, []);
-
-    useEffect(() => {
-        if (isPaused) {
-            clearInterval(intervalRef.current);
-        } else {
-            startInterval();
-        }
-    }, [isPaused]);
 
     const goTo = (newIndex) => {
         setDirection(newIndex > index ? 1 : -1);
@@ -60,11 +51,7 @@ const ReasonsCarousel = () => {
         <section className="py-20 px-4 relative z-10">
             <h2 className="text-3xl md:text-4xl font-serif text-center mb-12">Why I Love You</h2>
 
-            <div
-                className="relative max-w-lg mx-auto"
-                onMouseEnter={() => setIsPaused(true)}
-                onMouseLeave={() => setIsPaused(false)}
-            >
+            <div className="relative max-w-lg mx-auto">
                 {/* Prev button */}
                 <motion.button
                     whileHover={{ scale: 1.1 }}
@@ -122,11 +109,6 @@ const ReasonsCarousel = () => {
                         />
                     ))}
                 </div>
-
-                {/* Pause indicator */}
-                {isPaused && (
-                    <p className="text-center text-xs text-white/30 mt-3 tracking-widest">paused</p>
-                )}
             </div>
         </section>
     );
