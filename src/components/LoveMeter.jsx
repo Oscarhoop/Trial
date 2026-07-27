@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Heart, Zap, Infinity, Calendar, TrendingUp, Sparkles } from 'lucide-react';
+import { Heart, Zap, Infinity, Calendar, Sparkles } from 'lucide-react';
 import { useEffect, useState, useMemo } from 'react';
 
 const LoveMeter = () => {
@@ -48,16 +48,6 @@ const LoveMeter = () => {
             glowColor: 'rgba(251, 191, 36, 0.5)',
             suffix: '%',
             description: 'Unbreakable'
-        },
-        {
-            icon: TrendingUp,
-            label: '2026 Progress',
-            value: 85,
-            maxValue: 100,
-            color: 'from-emerald-400 to-teal-500',
-            glowColor: 'rgba(52, 211, 153, 0.5)',
-            suffix: '%',
-            description: 'Building Our Future'
         },
         {
             icon: Calendar,
