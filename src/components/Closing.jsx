@@ -11,31 +11,19 @@ const Closing = () => {
                 className="text-center max-w-2xl"
             >
                 <motion.p
-                    className="text-3xl md:text-5xl font-serif text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-pink-300 to-rose-400 leading-relaxed"
-                    animate={{
-                        backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
-                    }}
-                    transition={{
-                        duration: 5,
-                        repeat: Infinity,
-                        ease: "linear"
-                    }}
-                    style={{ backgroundSize: '200% 200%' }}
+                    className="text-3xl md:text-5xl font-serif leading-relaxed text-white"
+                    animate={{ filter: ['hue-rotate(0deg)', 'hue-rotate(30deg)', 'hue-rotate(0deg)'] }}
+                    transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+                    style={{ color: '#f472b6' }}
                 >
                     You'll Forever Be Mine
                 </motion.p>
+
                 <motion.p
-                    className="text-3xl md:text-5xl font-serif text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-pink-300 to-rose-400 mt-4 leading-relaxed"
-                    animate={{
-                        backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
-                    }}
-                    transition={{
-                        duration: 5,
-                        repeat: Infinity,
-                        ease: "linear",
-                        delay: 0.2
-                    }}
-                    style={{ backgroundSize: '200% 200%' }}
+                    className="text-3xl md:text-5xl font-serif mt-4 leading-relaxed"
+                    animate={{ filter: ['hue-rotate(0deg)', 'hue-rotate(-30deg)', 'hue-rotate(0deg)'] }}
+                    transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+                    style={{ color: '#fb7185' }}
                 >
                     And I'll Forever Be Yours
                 </motion.p>
@@ -44,7 +32,12 @@ const Closing = () => {
                     className="mt-8 text-6xl"
                     animate={{
                         scale: [1, 1.2, 1],
-                        rotate: [0, 5, -5, 0]
+                        rotate: [0, 5, -5, 0],
+                        filter: [
+                            'drop-shadow(0 0 8px rgba(244,63,94,0.5))',
+                            'drop-shadow(0 0 24px rgba(244,63,94,0.9))',
+                            'drop-shadow(0 0 8px rgba(244,63,94,0.5))',
+                        ]
                     }}
                     transition={{
                         duration: 2,

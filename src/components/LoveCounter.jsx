@@ -1,9 +1,37 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Card from './ui/Card';
 
+// Animated digit that flips when its value changes
+const FlipDigit = ({ value, unit }) => {
+    return (
+        <motion.div
+            className="flex flex-col items-center"
+            initial={{ scale: 0.5, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ type: "spring", bounce: 0.5 }}
+            viewport={{ once: true }}
+        >
+            <div className="relative h-16 md:h-24 overflow-hidden flex items-center justify-center">
+                <AnimatePresence mode="popLayout">
+                    <motion.span
+                        key={value}
+                        className="text-4xl md:text-6xl font-bold bg-gradient-to-b from-white to-gray-400 bg-clip-text text-transparent"
+                        initial={{ y: -30, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        exit={{ y: 30, opacity: 0 }}
+                        transition={{ duration: 0.2, ease: 'easeOut' }}
+                    >
+                        {String(value).padStart(unit === 'days' ? 1 : 2, '0')}
+                    </motion.span>
+                </AnimatePresence>
+            </div>
+            <span className="text-sm uppercase tracking-widest text-gray-400 mt-2">{unit}</span>
+        </motion.div>
+    );
+};
+
 const LoveCounter = ({ startDate }) => {
-    // Default to a date if none provided (e.g., Jan 1, 2024)
     const start = startDate ? new Date(startDate) : new Date('2024-01-01T00:00:00');
 
     const [timeElapsed, setTimeElapsed] = useState({
@@ -14,7 +42,7 @@ const LoveCounter = ({ startDate }) => {
     });
 
     useEffect(() => {
-        const timer = setInterval(() => {
+        const tick = () => {
             const now = new Date();
             const difference = now - start;
 
@@ -24,10 +52,12 @@ const LoveCounter = ({ startDate }) => {
             const seconds = Math.floor((difference / 1000) % 60);
 
             setTimeElapsed({ days, hours, minutes, seconds });
-        }, 1000);
+        };
 
+        tick(); // Run immediately
+        const timer = setInterval(tick, 1000);
         return () => clearInterval(timer);
-    }, [start]);
+    }, []);
 
     return (
         <section className="py-20 px-4 flex flex-col items-center justify-center relative z-10 text-white">
@@ -43,19 +73,7 @@ const LoveCounter = ({ startDate }) => {
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                     {Object.entries(timeElapsed).map(([unit, value]) => (
-                        <motion.div
-                            key={unit}
-                            className="flex flex-col items-center"
-                            initial={{ scale: 0.5, opacity: 0 }}
-                            whileInView={{ scale: 1, opacity: 1 }}
-                            transition={{ type: "spring", bounce: 0.5 }}
-                            viewport={{ once: true }}
-                        >
-                            <span className="text-4xl md:text-6xl font-bold bg-gradient-to-b from-white to-gray-400 bg-clip-text text-transparent">
-                                {value}
-                            </span>
-                            <span className="text-sm uppercase tracking-widest text-gray-400 mt-2">{unit}</span>
-                        </motion.div>
+                        <FlipDigit key={unit} value={value} unit={unit} />
                     ))}
                 </div>
             </Card>

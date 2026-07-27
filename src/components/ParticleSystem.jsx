@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
 
 const ParticleSystem = () => {
     const canvasRef = useRef(null);
+    const animFrameRef = useRef(null);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -180,7 +180,7 @@ const ParticleSystem = () => {
                 }
             }
 
-            requestAnimationFrame(animate);
+            animFrameRef.current = requestAnimationFrame(animate);
         };
 
         animate();
@@ -189,11 +189,17 @@ const ParticleSystem = () => {
         const handleResize = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+            // Re-initialize particles for new dimensions
+            stars.length = 0;
+            petals.length = 0;
+            for (let i = 0; i < 100; i++) stars.push(new Star());
+            for (let i = 0; i < 15; i++) petals.push(new RosePetal());
         };
 
         window.addEventListener('resize', handleResize);
 
         return () => {
+            cancelAnimationFrame(animFrameRef.current);
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('resize', handleResize);
         };

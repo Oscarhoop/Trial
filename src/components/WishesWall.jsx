@@ -118,7 +118,7 @@ const WishesWall = () => {
                 {/* Constellation of wishes */}
                 <div className="relative w-full h-[600px] md:h-[700px]">
                     {/* Connecting lines */}
-                    <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20">
+                    <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
                         <defs>
                             <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" stopColor="#d4af37" stopOpacity="0.3" />
@@ -127,6 +127,11 @@ const WishesWall = () => {
                         </defs>
                         {wishes.map((wish, index) => {
                             if (index < wishes.length - 1) {
+                                // Parse percentage strings like "20%" → 20
+                                const x1 = parseFloat(wish.position.left);
+                                const y1 = parseFloat(wish.position.top);
+                                const x2 = parseFloat(wishes[index + 1].position.left);
+                                const y2 = parseFloat(wishes[index + 1].position.top);
                                 return (
                                     <motion.line
                                         key={`line-${wish.id}`}
@@ -134,12 +139,12 @@ const WishesWall = () => {
                                         whileInView={{ pathLength: 1 }}
                                         viewport={{ once: true }}
                                         transition={{ duration: 1.5, delay: index * 0.1 }}
-                                        x1={wish.position.left}
-                                        y1={wish.position.top}
-                                        x2={wishes[index + 1].position.left}
-                                        y2={wishes[index + 1].position.top}
+                                        x1={x1}
+                                        y1={y1}
+                                        x2={x2}
+                                        y2={y2}
                                         stroke="url(#lineGradient)"
-                                        strokeWidth="1"
+                                        strokeWidth="0.3"
                                     />
                                 );
                             }

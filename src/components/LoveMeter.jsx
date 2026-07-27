@@ -1,16 +1,24 @@
 import { motion } from 'framer-motion';
 import { Heart, Zap, Infinity, Calendar, TrendingUp, Sparkles } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 
 const LoveMeter = () => {
     const [animateStats, setAnimateStats] = useState(false);
+
+    function calculateDaysTogether() {
+        const startDate = new Date('2026-02-24');
+        const today = new Date();
+        const diffTime = Math.abs(today - startDate);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        return diffDays;
+    }
 
     useEffect(() => {
         const timer = setTimeout(() => setAnimateStats(true), 500);
         return () => clearTimeout(timer);
     }, []);
 
-    const stats = [
+    const stats = useMemo(() => [
         {
             icon: Heart,
             label: 'Compatibility',
@@ -71,15 +79,7 @@ const LoveMeter = () => {
             suffix: '%',
             description: 'Pure Happiness'
         }
-    ];
-
-    function calculateDaysTogether() {
-        const startDate = new Date('2026-02-24');
-        const today = new Date();
-        const diffTime = Math.abs(today - startDate);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        return diffDays;
-    }
+    ], []);
 
     return (
         <section className="py-20 px-4 relative z-10">

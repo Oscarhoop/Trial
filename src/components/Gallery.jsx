@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -20,9 +20,21 @@ const Gallery = () => {
     };
 
     const next = (e) => {
-        e.stopPropagation();
+        e?.stopPropagation();
         setSelectedId((id) => (id + 1) % photos.length);
     };
+
+    // Keyboard navigation for lightbox
+    useEffect(() => {
+        if (selectedId === null) return;
+        const handleKey = (e) => {
+            if (e.key === 'Escape') setSelectedId(null);
+            if (e.key === 'ArrowLeft') prev();
+            if (e.key === 'ArrowRight') next();
+        };
+        window.addEventListener('keydown', handleKey);
+        return () => window.removeEventListener('keydown', handleKey);
+    }, [selectedId]);
 
     return (
         <section className="py-24 px-4 relative z-10 w-full overflow-hidden">

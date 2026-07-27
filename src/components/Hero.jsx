@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 import TypewriterText from './TypewriterText';
 
 const Hero = () => {
@@ -46,24 +47,18 @@ const Hero = () => {
             </motion.div>
 
             <motion.div
-                className="absolute bottom-10"
+                className="absolute bottom-10 flex flex-col items-center gap-1"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 5, duration: 1 }}
             >
-                {/* Animated scroll indicator */}
+                <span className="text-xs text-white/30 tracking-widest uppercase">Scroll</span>
                 <motion.div
-                    className="w-1 h-12 bg-gradient-to-b from-transparent via-gold to-transparent"
-                    animate={{
-                        opacity: [0.3, 1, 0.3],
-                        scaleY: [1, 1.2, 1]
-                    }}
-                    transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                    }}
-                />
+                    animate={{ y: [0, 8, 0] }}
+                    transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                    <ChevronDown className="w-6 h-6 text-gold/60" />
+                </motion.div>
             </motion.div>
         </section>
     );
