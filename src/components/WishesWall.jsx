@@ -19,7 +19,7 @@ const WishesWall = () => {
             id: 2,
             icon: Home,
             title: 'Our Home',
-            wish: 'Build a cozy space together, where every corner tells our story',
+            wish: 'Build a cozy space together just ours. A home where every corner tells our story',
             color: 'from-amber-400 to-orange-500',
             position: { top: '25%', left: '70%' },
             size: 'medium'
@@ -28,7 +28,7 @@ const WishesWall = () => {
             id: 3,
             icon: Plane,
             title: 'Adventures Together',
-            wish: 'Explore the world hand in hand, creating memories in every place',
+            wish: 'Explore the world hand in hand, creating memories in every corner of the earth',
             color: 'from-blue-400 to-cyan-500',
             position: { top: '45%', left: '15%' },
             size: 'medium'
@@ -37,7 +37,7 @@ const WishesWall = () => {
             id: 4,
             icon: Camera,
             title: 'More Memories Together',
-            wish: 'Endless photos of us laughing, loving, living every beautiful moment side by side',
+            wish: 'Endless photos of us laughing, loving, and living every beautiful moment side by side',
             color: 'from-purple-400 to-pink-500',
             position: { top: '60%', left: '65%' },
             size: 'large'
@@ -46,7 +46,7 @@ const WishesWall = () => {
             id: 5,
             icon: Coffee,
             title: 'Morning Coffee',
-            wish: 'Wake up next to you and share quiet morning moments together',
+            wish: 'Wake up next to you every day and share quiet mornings together just us',
             color: 'from-yellow-400 to-amber-500',
             position: { top: '70%', left: '30%' },
             size: 'small'
@@ -55,7 +55,7 @@ const WishesWall = () => {
             id: 6,
             icon: Music,
             title: 'Our Song',
-            wish: 'Dance with you to our favorite songs, no matter where we are',
+            wish: 'Dance with you to our favorite songs, no matter where we are or how silly we look',
             color: 'from-green-400 to-emerald-500',
             position: { top: '35%', left: '45%' },
             size: 'medium'
@@ -64,7 +64,7 @@ const WishesWall = () => {
             id: 7,
             icon: Sunrise,
             title: 'Watch Sunrises',
-            wish: 'See every new day begin with you by my side',
+            wish: 'See every new day begin with you by my side each morning, a fresh start together',
             color: 'from-orange-400 to-red-500',
             position: { top: '50%', left: '80%' },
             size: 'small'
@@ -73,7 +73,7 @@ const WishesWall = () => {
             id: 8,
             icon: Moon,
             title: 'Starlit Nights',
-            wish: 'Stargaze together and dream about all our tomorrows',
+            wish: 'Stargaze together and dream out loud about all our beautiful tomorrows',
             color: 'from-indigo-400 to-purple-500',
             position: { top: '80%', left: '50%' },
             size: 'medium'
@@ -82,7 +82,7 @@ const WishesWall = () => {
             id: 9,
             icon: Sparkles,
             title: 'Forever',
-            wish: 'Build a lifetime of love, laughter, and unforgettable moments',
+            wish: 'Build a lifetime of love, laughter, and unforgettable moments just you and me',
             color: 'from-pink-400 to-rose-500',
             position: { top: '10%', left: '50%' },
             size: 'large'
@@ -97,6 +97,63 @@ const WishesWall = () => {
         }
     };
 
+    const WishCard = ({ wish, index }) => {
+        const Icon = wish.icon;
+        return (
+            <motion.div
+                key={wish.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.08 }}
+                onClick={() => setSelectedWish(selectedWish?.id === wish.id ? null : wish)}
+                className="cursor-pointer group"
+            >
+                <div
+                    className={`relative rounded-2xl border border-white/10 p-4 flex items-start gap-3 transition-all duration-300 hover:border-white/25 hover:bg-white/10 ${
+                        selectedWish?.id === wish.id ? 'bg-white/10 border-white/25' : 'bg-white/5'
+                    }`}
+                    style={{
+                        backdropFilter: 'blur(10px)',
+                        boxShadow: selectedWish?.id === wish.id
+                            ? '0 0 25px rgba(212,175,55,0.15)'
+                            : '0 0 10px rgba(0,0,0,0.3)',
+                    }}
+                >
+                    {/* Icon */}
+                    <div className={`flex-shrink-0 w-11 h-11 rounded-xl bg-gradient-to-br ${wish.color} flex items-center justify-center`}
+                        style={{ boxShadow: '0 0 15px rgba(212,175,55,0.25)' }}
+                    >
+                        <Icon className="w-5 h-5 text-white" />
+                    </div>
+
+                    {/* Text */}
+                    <div className="flex-1 min-w-0">
+                        <p className={`text-xs font-semibold tracking-widest uppercase mb-1 bg-gradient-to-r ${wish.color} bg-clip-text text-transparent`}>
+                            {wish.title}
+                        </p>
+                        <AnimatePresence>
+                            {selectedWish?.id === wish.id && (
+                                <motion.p
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={{ opacity: 1, height: 'auto' }}
+                                    exit={{ opacity: 0, height: 0 }}
+                                    transition={{ duration: 0.25 }}
+                                    className="text-white/80 text-sm leading-relaxed font-serif italic overflow-hidden"
+                                >
+                                    {wish.wish}
+                                </motion.p>
+                            )}
+                        </AnimatePresence>
+                        {selectedWish?.id !== wish.id && (
+                            <p className="text-white/30 text-xs truncate">{wish.wish}</p>
+                        )}
+                    </div>
+                </div>
+            </motion.div>
+        );
+    };
+
     return (
         <section className="py-20 px-4 relative z-10 min-h-screen flex items-center">
             <div className="max-w-7xl mx-auto w-full">
@@ -105,7 +162,7 @@ const WishesWall = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
-                    className="text-center mb-8"
+                    className="text-center mb-12"
                 >
                     <h2 className="text-4xl md:text-5xl font-serif mb-4 text-white">
                         Our Wishes Wall
@@ -115,8 +172,15 @@ const WishesWall = () => {
                     </p>
                 </motion.div>
 
-                {/* Constellation of wishes */}
-                <div className="relative w-full h-[600px] md:h-[700px]">
+                {/* ── Mobile: card grid ── */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:hidden">
+                    {wishes.map((wish, index) => (
+                        <WishCard key={wish.id} wish={wish} index={index} />
+                    ))}
+                </div>
+
+                {/* ── Desktop: constellation ── */}
+                <div className="relative w-full h-[700px] hidden md:block">
                     {/* Connecting lines */}
                     <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
                         <defs>
@@ -127,7 +191,6 @@ const WishesWall = () => {
                         </defs>
                         {wishes.map((wish, index) => {
                             if (index < wishes.length - 1) {
-                                // Parse percentage strings like "20%" → 20
                                 const x1 = parseFloat(wish.position.left);
                                 const y1 = parseFloat(wish.position.top);
                                 const x2 = parseFloat(wishes[index + 1].position.left);
@@ -171,8 +234,9 @@ const WishesWall = () => {
                                 }}
                                 className="absolute cursor-pointer"
                                 style={wish.position}
-                                onClick={() => setSelectedWish(wish)}
+                                onClick={() => setSelectedWish(selectedWish?.id === wish.id ? null : wish)}
                                 onMouseEnter={() => setSelectedWish(wish)}
+                                onMouseLeave={() => setSelectedWish(null)}
                             >
                                 <motion.div
                                     whileHover={{ scale: 1.2, rotate: 5 }}
@@ -226,20 +290,17 @@ const WishesWall = () => {
                                     </motion.div>
                                 </motion.div>
 
-                                {/* Tooltip on hover (desktop) */}
-                                <motion.div
-                                    initial={{ opacity: 0, y: 10 }}
-                                    whileHover={{ opacity: 1, y: 0 }}
-                                    className="hidden md:block absolute top-full mt-2 left-1/2 -translate-x-1/2 whitespace-nowrap"
-                                >
-                                    <div className="bg-black/80 backdrop-blur-md px-3 py-1 rounded-lg text-sm text-gold font-semibold">
+                                {/* Title tooltip */}
+                                <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 whitespace-nowrap z-10">
+                                    <div className="bg-black/80 backdrop-blur-md px-3 py-1 rounded-lg text-sm text-gold font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                                         {wish.title}
                                     </div>
-                                </motion.div>
+                                </div>
                             </motion.div>
                         );
                     })}
-                    {/* Selected wish — centered overlay inside the constellation */}
+
+                    {/* Selected wish — centered overlay */}
                     <AnimatePresence mode="wait">
                         {selectedWish && (
                             <motion.div
@@ -250,7 +311,7 @@ const WishesWall = () => {
                                 transition={{ duration: 0.2 }}
                                 className="absolute inset-0 flex items-center justify-center pointer-events-none z-20"
                             >
-                                <div className={`bg-black/60 backdrop-blur-xl border border-white/20 rounded-3xl px-8 py-6 max-w-sm text-center shadow-[0_0_60px_rgba(212,175,55,0.15)]`}>
+                                <div className="bg-black/60 backdrop-blur-xl border border-white/20 rounded-3xl px-8 py-6 max-w-sm text-center shadow-[0_0_60px_rgba(212,175,55,0.15)]">
                                     <p className={`text-xs font-semibold tracking-widest uppercase mb-2 bg-gradient-to-r ${selectedWish.color} bg-clip-text text-transparent`}>
                                         {selectedWish.title}
                                     </p>

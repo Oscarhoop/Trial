@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Card from './ui/Card';
 
@@ -32,7 +32,10 @@ const FlipDigit = ({ value, unit }) => {
 };
 
 const LoveCounter = ({ startDate }) => {
-    const start = startDate ? new Date(startDate) : new Date('2024-01-01T00:00:00');
+    const start = useMemo(
+        () => startDate ? new Date(startDate) : new Date('2024-01-01T00:00:00'),
+        [startDate]
+    );
 
     const [timeElapsed, setTimeElapsed] = useState({
         days: 0,
