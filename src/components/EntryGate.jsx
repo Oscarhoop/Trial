@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Heart } from 'lucide-react';
 
 // Pre-computed stable particle data
 const PARTICLES = Array.from({ length: 30 }, (_, i) => ({
@@ -143,9 +144,18 @@ const EntryGate = ({ onEnter }) => {
                                             repeat: Infinity,
                                             ease: [0.4, 0, 0.6, 1],
                                         }}
-                                        style={{ fontSize: '4rem', lineHeight: 1 }}
+                                        className="relative w-20 h-20 rounded-full flex items-center justify-center"
+                                        style={{
+                                            background: 'linear-gradient(135deg, #be123c 0%, #9f1239 50%, #7f1d1d 100%)',
+                                            boxShadow: '0 0 40px rgba(190,18,60,0.5), 0 0 80px rgba(190,18,60,0.2)',
+                                        }}
                                     >
-                                        ❤️
+                                        <Heart
+                                            size={36}
+                                            className="text-white"
+                                            fill="white"
+                                            strokeWidth={0}
+                                        />
                                     </motion.div>
                                 </motion.div>
                             )}
