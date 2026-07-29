@@ -179,7 +179,7 @@ const EntryGate = ({ onEnter }) => {
                             className="font-serif text-base italic mb-12"
                             style={{ color: 'rgba(212,175,55,0.55)' }}
                         >
-                            A love letter, just for you.
+                            Written from my heart, straight to yours.
                         </motion.p>
 
                         {/* Click CTA */}
