@@ -169,16 +169,6 @@ const EntryGate = ({ onEnter }) => {
                             className="font-serif text-2xl md:text-3xl leading-relaxed mb-2"
                             style={{ color: 'rgba(255,255,255,0.9)' }}
                         >
-                            For the one who holds my heart...
-                        </motion.p>
-
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 1.5, delay: 1.0 }}
-                            className="font-serif text-base italic mb-12"
-                            style={{ color: 'rgba(212,175,55,0.55)' }}
-                        >
                             Written from my heart, straight to yours.
                         </motion.p>
 
