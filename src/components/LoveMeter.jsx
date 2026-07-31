@@ -9,7 +9,7 @@ const LoveMeter = () => {
         const startDate = new Date('2026-02-24');
         const today = new Date();
         const diffTime = Math.abs(today - startDate);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
         return diffDays;
     }
 
