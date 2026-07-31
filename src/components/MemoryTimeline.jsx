@@ -11,36 +11,32 @@ const MemoryTimeline = () => {
             date: 'High School',
             title: 'Where It All Began',
             description: 'Long before we knew what the future held, we became friends. The foundation of our love was laid in those early days.',
-            icon: Heart,
-            color: 'from-rose-500 to-pink-500',
-            cardIcon: BookOpen
+            icon: BookOpen,
+            color: 'from-rose-500 to-pink-500'
         },
         {
             id: 2,
             date: 'Through The Years',
             title: 'Ups, Downs & Breaks',
             description: 'We had our highs and lows, and even spent years apart. But true love has a funny way of always bringing us back together at the end of it all.',
-            icon: Sparkles,
-            color: 'from-purple-500 to-indigo-500',
-            cardIcon: Clock
+            icon: Clock,
+            color: 'from-purple-500 to-indigo-500'
         },
         {
             id: 3,
             date: 'February 24, 2026',
             title: 'Our New Chapter',
             description: 'The day we realized that no matter what, we belong together. We stopped running and started our forever.',
-            icon: Star,
-            color: 'from-amber-500 to-orange-500',
-            cardIcon: HeartHandshake
+            icon: HeartHandshake,
+            color: 'from-amber-500 to-orange-500'
         },
         {
             id: 4,
             date: 'Present & Beyond',
             title: 'Together, Always',
             description: "Through every twist and turn, you are my constant. Happy Girlfriend's Day to the love of my life.",
-            icon: Calendar,
-            color: 'from-emerald-500 to-teal-500',
-            cardIcon: Infinity
+            icon: Infinity,
+            color: 'from-emerald-500 to-teal-500'
         }
     ];
 
@@ -71,27 +67,22 @@ const MemoryTimeline = () => {
                             viewport={{ once: true, margin: '-60px' }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                         >
-                            {/* Circle dot on the line */}
-                            <div className="absolute -left-[26px] top-5 flex items-center justify-center">
+                            {/* Circle dot on the line (using the single icon) */}
+                            <div className="absolute -left-[26px] top-3 flex items-center justify-center">
                                 <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${memory.color} flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.35)] flex-shrink-0`}>
                                     <Icon className="w-5 h-5 text-white" />
                                 </div>
                             </div>
 
-                            {/* Card */}
+                            {/* Card without duplicate card icon */}
                             <motion.div
                                 whileTap={{ scale: 0.98 }}
                                 onClick={() => setSelectedMemory(memory)}
                                 className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 cursor-pointer hover:bg-white/10 transition-all duration-300 shadow-[0_0_20px_rgba(212,175,55,0.08)]"
                             >
-                                <div className="flex items-center gap-3 mb-2">
-                                    <div className={`p-2 rounded-xl bg-gradient-to-br ${memory.color} bg-opacity-20 flex-shrink-0`}>
-                                        <memory.cardIcon className="w-5 h-5 text-gold" />
-                                    </div>
-                                    <div>
-                                        <p className="text-xs text-gold font-semibold tracking-wider">{memory.date}</p>
-                                        <h3 className="text-lg font-serif text-white leading-tight">{memory.title}</h3>
-                                    </div>
+                                <div className="mb-2">
+                                    <p className="text-xs text-gold font-semibold tracking-wider">{memory.date}</p>
+                                    <h3 className="text-lg font-serif text-white leading-tight mt-0.5">{memory.title}</h3>
                                 </div>
                                 <p className="text-gray-300 text-sm leading-relaxed">{memory.description}</p>
                             </motion.div>
@@ -118,25 +109,20 @@ const MemoryTimeline = () => {
                             viewport={{ once: true, margin: '-100px' }}
                             transition={{ duration: 0.6, delay: index * 0.1 }}
                         >
-                            {/* Content Card */}
+                            {/* Content Card (without duplicate card icon) */}
                             <motion.div
                                 className={`w-5/12 ${isLeft ? 'text-right' : 'text-left'}`}
                                 whileHover={{ scale: 1.05 }}
                                 onClick={() => setSelectedMemory(memory)}
                             >
                                 <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 cursor-pointer hover:bg-white/10 transition-all duration-300 shadow-[0_0_30px_rgba(212,175,55,0.1)]">
-                                    <div className={`flex items-center gap-4 mb-4 ${isLeft ? 'flex-row-reverse' : ''}`}>
-                                        <div className={`p-3 rounded-xl bg-gradient-to-br ${memory.color} bg-opacity-20 flex-shrink-0`}>
-                                            <memory.cardIcon className="w-8 h-8 text-gold" />
-                                        </div>
-                                        <div className={isLeft ? 'text-right flex-1' : 'text-left flex-1'}>
-                                            <p className="text-sm text-gold font-semibold tracking-wider">
-                                                {memory.date}
-                                            </p>
-                                            <h3 className="text-xl md:text-2xl font-serif text-white">
-                                                {memory.title}
-                                            </h3>
-                                        </div>
+                                    <div className="mb-3">
+                                        <p className="text-sm text-gold font-semibold tracking-wider">
+                                            {memory.date}
+                                        </p>
+                                        <h3 className="text-xl md:text-2xl font-serif text-white mt-1">
+                                            {memory.title}
+                                        </h3>
                                     </div>
                                     <p className="text-gray-300 leading-relaxed">
                                         {memory.description}
@@ -195,7 +181,7 @@ const MemoryTimeline = () => {
 
                             <div className="text-center relative z-10 flex flex-col items-center">
                                 <div className={`p-4 rounded-2xl bg-gradient-to-br ${selectedMemory.color} bg-opacity-20 inline-flex mb-5`}>
-                                    <selectedMemory.cardIcon className="w-10 h-10 md:w-12 md:h-12 text-gold" />
+                                    {(() => { const Icon = selectedMemory.icon; return <Icon className="w-10 h-10 md:w-12 md:h-12 text-gold" />; })()}
                                 </div>
                                 <p className="text-gold font-semibold mb-2">{selectedMemory.date}</p>
                                 <h3 className="text-2xl md:text-3xl font-serif mb-4 text-white">{selectedMemory.title}</h3>
