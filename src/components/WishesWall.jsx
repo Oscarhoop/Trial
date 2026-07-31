@@ -167,10 +167,10 @@ const WishesWall = () => {
                     className="text-center mb-10"
                 >
                     <h2 className="text-4xl md:text-5xl font-serif mb-3 text-white">
-                        Our Wishes Wall
+                        My Wishes for You
                     </h2>
                     <p className="text-gray-400 text-base md:text-lg">
-                        Every dream we'll make come true. Together.
+                        Everything I wish you could feel, have, and know forever.
                     </p>
                 </motion.div>
 
