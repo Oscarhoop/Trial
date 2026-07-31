@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import EntryGate from './components/EntryGate';
 import Hero from './components/Hero';
 import LoveLetter from './components/LoveLetter';
-import LoveMeter from './components/LoveMeter';
+
 import Gallery from './components/Gallery';
 import LoveCounter from './components/LoveCounter';
 import MemoryTimeline from './components/MemoryTimeline';
@@ -46,7 +46,6 @@ function App() {
         >
           <Hero />
           <LoveLetter />
-          <LoveMeter />
           <LoveCounter startDate="2026-02-24" />
           <Gallery />
           <MemoryTimeline />
