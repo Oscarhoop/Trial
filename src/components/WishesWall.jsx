@@ -1,24 +1,23 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, Sparkles, Heart, Home, Plane, Camera, Coffee, Music, Sunrise, Moon, X } from 'lucide-react';
+import { Star, Sparkles, Heart, Home, Plane, Coffee, Music, Sunrise, Moon } from 'lucide-react';
 
 const wishes = [
     {
         id: 1,
         icon: Heart,
-        title: 'Our Anniversary',
-        wish: 'Celebrating every year together, each one deeper and more beautiful than the last',
+        title: 'Always Feel Chosen',
+        wish: 'I wish you always know that I choose you. Not by habit. Not by chance. By heart. Every single day.',
         color: 'from-rose-500 to-pink-600',
         glow: 'rgba(244,63,94,0.35)',
-        // bento span: col-span-2 on desktop, col-span-2 on mobile (full row)
         span: 'col-span-2 md:col-span-2 row-span-1',
         featured: true,
     },
     {
         id: 2,
         icon: Home,
-        title: 'Our Home',
-        wish: 'Build a cozy space together just ours. A home where every corner tells our story',
+        title: 'Feel at Home',
+        wish: 'I wish you always feel safe with me. Like wherever we are together is exactly where you belong.',
         color: 'from-amber-400 to-orange-500',
         glow: 'rgba(251,146,60,0.35)',
         span: 'col-span-1 row-span-2',
@@ -26,19 +25,19 @@ const wishes = [
     },
     {
         id: 3,
-        icon: Plane,
-        title: 'Adventures Together',
-        wish: 'Explore the world hand in hand, creating memories in every corner of the earth',
-        color: 'from-blue-400 to-cyan-500',
-        glow: 'rgba(34,211,238,0.35)',
+        icon: Sunrise,
+        title: 'Peaceful Mornings',
+        wish: 'I wish you mornings that are soft and slow. Full of warmth and the quiet kind of happiness.',
+        color: 'from-orange-400 to-red-500',
+        glow: 'rgba(249,115,22,0.35)',
         span: 'col-span-1 row-span-1',
         featured: false,
     },
     {
         id: 4,
-        icon: Camera,
-        title: 'More Memories',
-        wish: 'Endless photos of us laughing, loving, and living every beautiful moment side by side',
+        icon: Star,
+        title: 'Know Your Worth',
+        wish: 'I wish you always see yourself the way I see you. Rare, radiant, and completely irreplaceable.',
         color: 'from-purple-500 to-pink-500',
         glow: 'rgba(168,85,247,0.35)',
         span: 'col-span-1 row-span-1',
