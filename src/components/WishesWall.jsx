@@ -47,8 +47,8 @@ const wishes = [
     {
         id: 5,
         icon: Sparkles,
-        title: 'Forever',
-        wish: 'Build a lifetime of love, laughter, and unforgettable moments just you and me',
+        title: 'Every Dream Come True',
+        wish: "I wish every dream you've ever quietly kept to yourself finds its way to you. You deserve all of them.",
         color: 'from-pink-400 to-rose-500',
         glow: 'rgba(244,114,182,0.35)',
         span: 'col-span-2 md:col-span-2 row-span-1',
@@ -57,8 +57,8 @@ const wishes = [
     {
         id: 6,
         icon: Music,
-        title: 'Our Song',
-        wish: 'Dance with you to our favourite songs, no matter where we are or how silly we look',
+        title: 'Laughter Always',
+        wish: 'I wish you laughter that fills the room. The uncontrollable kind that makes your eyes water.',
         color: 'from-green-400 to-emerald-500',
         glow: 'rgba(52,211,153,0.35)',
         span: 'col-span-1 row-span-1',
@@ -67,8 +67,8 @@ const wishes = [
     {
         id: 7,
         icon: Coffee,
-        title: 'Morning Coffee',
-        wish: 'Wake up next to you every day and share quiet mornings together just us',
+        title: 'Be Truly Seen',
+        wish: 'I wish you always feel understood. The full, real, unfiltered you. Never having to shrink for anyone.',
         color: 'from-yellow-400 to-amber-500',
         glow: 'rgba(251,191,36,0.35)',
         span: 'col-span-1 row-span-1',
@@ -76,19 +76,19 @@ const wishes = [
     },
     {
         id: 8,
-        icon: Sunrise,
-        title: 'Watch Sunrises',
-        wish: 'See every new day begin with you by my side each morning a fresh start together',
-        color: 'from-orange-400 to-red-500',
-        glow: 'rgba(249,115,22,0.35)',
+        icon: Plane,
+        title: 'Adventures Ahead',
+        wish: "I wish you moments that take your breath away. Places, experiences, and feelings you'll never forget.",
+        color: 'from-blue-400 to-cyan-500',
+        glow: 'rgba(34,211,238,0.35)',
         span: 'col-span-1 row-span-1',
         featured: false,
     },
     {
         id: 9,
         icon: Moon,
-        title: 'Starlit Nights',
-        wish: 'Stargaze together and dream out loud about all our beautiful tomorrows',
+        title: 'Peace That Stays',
+        wish: 'I wish you an inner peace that never leaves. A stillness that no storm can touch.',
         color: 'from-indigo-400 to-purple-500',
         glow: 'rgba(99,102,241,0.35)',
         span: 'col-span-1 row-span-1',
@@ -171,7 +171,7 @@ const WishesWall = () => {
                         Our Wishes Wall
                     </h2>
                     <p className="text-gray-400 text-base md:text-lg">
-                        Every dream we'll make come true — together
+                        Every dream we'll make come true. Together.
                     </p>
                 </motion.div>
 
