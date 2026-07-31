@@ -2,316 +2,267 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Sparkles, Heart, Home, Plane, Camera, Coffee, Music, Sunrise, Moon, X } from 'lucide-react';
 
+const wishes = [
+    {
+        id: 1,
+        icon: Heart,
+        title: 'Our Anniversary',
+        wish: 'Celebrating every year together, each one deeper and more beautiful than the last',
+        color: 'from-rose-500 to-pink-600',
+        glow: 'rgba(244,63,94,0.35)',
+        // bento span: col-span-2 on desktop, col-span-2 on mobile (full row)
+        span: 'col-span-2 md:col-span-2 row-span-1',
+        featured: true,
+    },
+    {
+        id: 2,
+        icon: Home,
+        title: 'Our Home',
+        wish: 'Build a cozy space together — just ours. A home where every corner tells our story',
+        color: 'from-amber-400 to-orange-500',
+        glow: 'rgba(251,146,60,0.35)',
+        span: 'col-span-1 row-span-2',
+        featured: false,
+    },
+    {
+        id: 3,
+        icon: Plane,
+        title: 'Adventures Together',
+        wish: 'Explore the world hand in hand, creating memories in every corner of the earth',
+        color: 'from-blue-400 to-cyan-500',
+        glow: 'rgba(34,211,238,0.35)',
+        span: 'col-span-1 row-span-1',
+        featured: false,
+    },
+    {
+        id: 4,
+        icon: Camera,
+        title: 'More Memories',
+        wish: 'Endless photos of us laughing, loving, and living every beautiful moment side by side',
+        color: 'from-purple-500 to-pink-500',
+        glow: 'rgba(168,85,247,0.35)',
+        span: 'col-span-1 row-span-1',
+        featured: false,
+    },
+    {
+        id: 5,
+        icon: Sparkles,
+        title: 'Forever',
+        wish: 'Build a lifetime of love, laughter, and unforgettable moments — just you and me',
+        color: 'from-pink-400 to-rose-500',
+        glow: 'rgba(244,114,182,0.35)',
+        span: 'col-span-2 md:col-span-2 row-span-1',
+        featured: true,
+    },
+    {
+        id: 6,
+        icon: Music,
+        title: 'Our Song',
+        wish: 'Dance with you to our favourite songs, no matter where we are or how silly we look',
+        color: 'from-green-400 to-emerald-500',
+        glow: 'rgba(52,211,153,0.35)',
+        span: 'col-span-1 row-span-1',
+        featured: false,
+    },
+    {
+        id: 7,
+        icon: Coffee,
+        title: 'Morning Coffee',
+        wish: 'Wake up next to you every day and share quiet mornings together — just us',
+        color: 'from-yellow-400 to-amber-500',
+        glow: 'rgba(251,191,36,0.35)',
+        span: 'col-span-1 row-span-1',
+        featured: false,
+    },
+    {
+        id: 8,
+        icon: Sunrise,
+        title: 'Watch Sunrises',
+        wish: 'See every new day begin with you by my side — each morning a fresh start together',
+        color: 'from-orange-400 to-red-500',
+        glow: 'rgba(249,115,22,0.35)',
+        span: 'col-span-1 row-span-1',
+        featured: false,
+    },
+    {
+        id: 9,
+        icon: Moon,
+        title: 'Starlit Nights',
+        wish: 'Stargaze together and dream out loud about all our beautiful tomorrows',
+        color: 'from-indigo-400 to-purple-500',
+        glow: 'rgba(99,102,241,0.35)',
+        span: 'col-span-1 row-span-1',
+        featured: false,
+    },
+];
+
+const WishCard = ({ wish, onClick }) => {
+    const Icon = wish.icon;
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.97 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.45, ease: 'easeOut' }}
+            whileHover={{ y: -4, scale: 1.02 }}
+            onClick={() => onClick(wish)}
+            className={`${wish.span} relative rounded-2xl md:rounded-3xl overflow-hidden cursor-pointer group`}
+            style={{
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                backdropFilter: 'blur(14px)',
+                boxShadow: `0 0 0 1px rgba(255,255,255,0.05), 0 8px 32px rgba(0,0,0,0.4)`,
+                minHeight: wish.featured ? '140px' : '130px',
+            }}
+        >
+            {/* Gradient accent top bar */}
+            <div className={`absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r ${wish.color} opacity-80`} />
+
+            {/* Soft glow blob */}
+            <div
+                className="absolute -top-10 -right-10 w-32 h-32 rounded-full blur-3xl opacity-20 group-hover:opacity-35 transition-opacity duration-500"
+                style={{ background: wish.glow }}
+            />
+
+            {/* Content */}
+            <div className={`relative z-10 p-4 md:p-5 h-full flex flex-col ${wish.featured ? 'justify-between' : 'gap-3'}`}>
+                {/* Top row: icon + title */}
+                <div className="flex items-start gap-3">
+                    <div
+                        className={`flex-shrink-0 w-10 h-10 md:w-11 md:h-11 rounded-xl bg-gradient-to-br ${wish.color} flex items-center justify-center`}
+                        style={{ boxShadow: `0 0 18px ${wish.glow}` }}
+                    >
+                        <Icon className="w-5 h-5 text-white" />
+                    </div>
+                    <p className={`text-[11px] md:text-xs font-bold tracking-widest uppercase pt-1 bg-gradient-to-r ${wish.color} bg-clip-text text-transparent leading-tight`}>
+                        {wish.title}
+                    </p>
+                </div>
+
+                {/* Wish text */}
+                <p className={`text-white/60 text-xs md:text-sm leading-relaxed font-serif italic ${wish.featured ? 'line-clamp-3' : 'line-clamp-2'}`}>
+                    {wish.wish}
+                </p>
+
+                {/* Tap hint */}
+                <p className="text-white/20 text-[10px] tracking-widest uppercase mt-auto hidden group-hover:block transition-all">
+                    tap to read ↗
+                </p>
+            </div>
+        </motion.div>
+    );
+};
+
 const WishesWall = () => {
-    const [selectedWish, setSelectedWish] = useState(null);
-
-    const wishes = [
-        {
-            id: 1,
-            icon: Heart,
-            title: 'Our Anniversary',
-            wish: 'Celebrating every year together, each one deeper and more beautiful than the last',
-            color: 'from-rose-400 to-pink-500',
-            position: { top: '15%', left: '20%' },
-            size: 'large'
-        },
-        {
-            id: 2,
-            icon: Home,
-            title: 'Our Home',
-            wish: 'Build a cozy space together just ours. A home where every corner tells our story',
-            color: 'from-amber-400 to-orange-500',
-            position: { top: '25%', left: '70%' },
-            size: 'medium'
-        },
-        {
-            id: 3,
-            icon: Plane,
-            title: 'Adventures Together',
-            wish: 'Explore the world hand in hand, creating memories in every corner of the earth',
-            color: 'from-blue-400 to-cyan-500',
-            position: { top: '45%', left: '15%' },
-            size: 'medium'
-        },
-        {
-            id: 4,
-            icon: Camera,
-            title: 'More Memories Together',
-            wish: 'Endless photos of us laughing, loving, and living every beautiful moment side by side',
-            color: 'from-purple-400 to-pink-500',
-            position: { top: '60%', left: '65%' },
-            size: 'large'
-        },
-        {
-            id: 5,
-            icon: Coffee,
-            title: 'Morning Coffee',
-            wish: 'Wake up next to you every day and share quiet mornings together just us',
-            color: 'from-yellow-400 to-amber-500',
-            position: { top: '70%', left: '30%' },
-            size: 'small'
-        },
-        {
-            id: 6,
-            icon: Music,
-            title: 'Our Song',
-            wish: 'Dance with you to our favorite songs, no matter where we are or how silly we look',
-            color: 'from-green-400 to-emerald-500',
-            position: { top: '35%', left: '45%' },
-            size: 'medium'
-        },
-        {
-            id: 7,
-            icon: Sunrise,
-            title: 'Watch Sunrises',
-            wish: 'See every new day begin with you by my side each morning, a fresh start together',
-            color: 'from-orange-400 to-red-500',
-            position: { top: '50%', left: '80%' },
-            size: 'small'
-        },
-        {
-            id: 8,
-            icon: Moon,
-            title: 'Starlit Nights',
-            wish: 'Stargaze together and dream out loud about all our beautiful tomorrows',
-            color: 'from-indigo-400 to-purple-500',
-            position: { top: '80%', left: '50%' },
-            size: 'medium'
-        },
-        {
-            id: 9,
-            icon: Sparkles,
-            title: 'Forever',
-            wish: 'Build a lifetime of love, laughter, and unforgettable moments just you and me',
-            color: 'from-pink-400 to-rose-500',
-            position: { top: '10%', left: '50%' },
-            size: 'large'
-        }
-    ];
-
-    const getSizeClasses = (size) => {
-        switch (size) {
-            case 'small': return 'w-12 h-12';
-            case 'large': return 'w-20 h-20';
-            default: return 'w-16 h-16';
-        }
-    };
+    const [selected, setSelected] = useState(null);
 
     return (
         <section className="py-16 px-4 relative z-10">
-            <div className="max-w-7xl mx-auto w-full">
+            <div className="max-w-5xl mx-auto">
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
+                    transition={{ duration: 0.7 }}
                     className="text-center mb-10"
                 >
-                    <h2 className="text-4xl md:text-5xl font-serif mb-4 text-white">
+                    <h2 className="text-4xl md:text-5xl font-serif mb-3 text-white">
                         Our Wishes Wall
                     </h2>
                     <p className="text-gray-400 text-base md:text-lg">
-                        Every star holds a dream we'll make come true together
+                        Every dream we'll make come true — together
                     </p>
                 </motion.div>
 
-                {/* ── Mobile: 2-column card grid ── */}
-                <div className="grid grid-cols-2 gap-3 md:hidden">
-                    {wishes.map((wish, index) => {
-                        const Icon = wish.icon;
-                        const isSelected = selectedWish?.id === wish.id;
-                        return (
-                            <motion.div
-                                key={wish.id}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.4, delay: index * 0.07 }}
-                                onClick={() => setSelectedWish(isSelected ? null : wish)}
-                                className="cursor-pointer"
-                            >
-                                <div
-                                    className={`rounded-2xl border p-3 flex flex-col gap-2 transition-all duration-300 ${
-                                        isSelected
-                                            ? 'border-white/30 bg-white/12'
-                                            : 'border-white/10 bg-white/5'
-                                    }`}
-                                    style={{
-                                        backdropFilter: 'blur(10px)',
-                                        boxShadow: isSelected
-                                            ? '0 0 25px rgba(212,175,55,0.2)'
-                                            : '0 0 10px rgba(0,0,0,0.3)',
-                                    }}
-                                >
-                                    {/* Icon row */}
-                                    <div className="flex items-center gap-2">
-                                        <div
-                                            className={`flex-shrink-0 w-9 h-9 rounded-xl bg-gradient-to-br ${wish.color} flex items-center justify-center`}
-                                            style={{ boxShadow: '0 0 12px rgba(212,175,55,0.25)' }}
-                                        >
-                                            <Icon className="w-4 h-4 text-white" />
-                                        </div>
-                                        <p className={`text-[10px] font-bold tracking-widest uppercase bg-gradient-to-r ${wish.color} bg-clip-text text-transparent leading-tight`}>
-                                            {wish.title}
-                                        </p>
-                                    </div>
-
-                                    {/* Wish text — always shown on mobile */}
-                                    <p className="text-white/60 text-xs leading-relaxed font-serif italic">
-                                        {wish.wish}
-                                    </p>
-                                </div>
-                            </motion.div>
-                        );
-                    })}
+                {/* Bento Grid */}
+                <div className="grid grid-cols-2 md:grid-cols-3 auto-rows-auto gap-3 md:gap-4">
+                    {wishes.map((wish) => (
+                        <WishCard key={wish.id} wish={wish} onClick={setSelected} />
+                    ))}
                 </div>
 
-                {/* ── Desktop: constellation ── */}
-                <div className="relative w-full h-[700px] hidden md:block">
-                    {/* Connecting lines */}
-                    <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
-                        <defs>
-                            <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stopColor="#d4af37" stopOpacity="0.3" />
-                                <stop offset="100%" stopColor="#d4af37" stopOpacity="0.8" />
-                            </linearGradient>
-                        </defs>
-                        {wishes.map((wish, index) => {
-                            if (index < wishes.length - 1) {
-                                const x1 = parseFloat(wish.position.left);
-                                const y1 = parseFloat(wish.position.top);
-                                const x2 = parseFloat(wishes[index + 1].position.left);
-                                const y2 = parseFloat(wishes[index + 1].position.top);
-                                return (
-                                    <motion.line
-                                        key={`line-${wish.id}`}
-                                        initial={{ pathLength: 0 }}
-                                        whileInView={{ pathLength: 1 }}
-                                        viewport={{ once: true }}
-                                        transition={{ duration: 1.5, delay: index * 0.1 }}
-                                        x1={x1}
-                                        y1={y1}
-                                        x2={x2}
-                                        y2={y2}
-                                        stroke="url(#lineGradient)"
-                                        strokeWidth="0.3"
-                                    />
-                                );
-                            }
-                            return null;
-                        })}
-                    </svg>
-
-                    {/* Wish stars */}
-                    {wishes.map((wish, index) => {
-                        const Icon = wish.icon;
-                        const sizeClass = getSizeClasses(wish.size);
-
-                        return (
-                            <motion.div
-                                key={wish.id}
-                                initial={{ opacity: 0, scale: 0 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{
-                                    duration: 0.5,
-                                    delay: index * 0.15,
-                                    type: 'spring',
-                                    stiffness: 200
-                                }}
-                                className="absolute cursor-pointer"
-                                style={wish.position}
-                                onClick={() => setSelectedWish(selectedWish?.id === wish.id ? null : wish)}
-                                onMouseEnter={() => setSelectedWish(wish)}
-                                onMouseLeave={() => setSelectedWish(null)}
-                            >
-                                <motion.div
-                                    whileHover={{ scale: 1.2, rotate: 5 }}
-                                    className={`${sizeClass} rounded-full bg-gradient-to-br ${wish.color} flex items-center justify-center relative group`}
-                                    style={{
-                                        boxShadow: `0 0 30px rgba(212, 175, 55, 0.4)`,
-                                    }}
-                                >
-                                    <Icon className="w-1/2 h-1/2 text-white" />
-
-                                    {/* Pulsing glow */}
-                                    <motion.div
-                                        className={`absolute inset-0 rounded-full bg-gradient-to-br ${wish.color} opacity-50 blur-md`}
-                                        animate={{
-                                            scale: [1, 1.3, 1],
-                                            opacity: [0.5, 0.8, 0.5]
-                                        }}
-                                        transition={{
-                                            duration: 2,
-                                            repeat: Infinity,
-                                            delay: index * 0.2
-                                        }}
-                                    />
-
-                                    {/* Star particles */}
-                                    <motion.div
-                                        className="absolute inset-0"
-                                        initial={{ opacity: 0 }}
-                                        whileHover={{ opacity: 1 }}
-                                    >
-                                        {[...Array(3)].map((_, i) => (
-                                            <motion.div
-                                                key={i}
-                                                className="absolute w-1 h-1 bg-gold rounded-full"
-                                                animate={{
-                                                    x: [0, (i - 1) * 20],
-                                                    y: [0, -20 - i * 10],
-                                                    opacity: [1, 0]
-                                                }}
-                                                transition={{
-                                                    duration: 1,
-                                                    repeat: Infinity,
-                                                    delay: i * 0.3
-                                                }}
-                                                style={{
-                                                    left: '50%',
-                                                    top: '50%'
-                                                }}
-                                            />
-                                        ))}
-                                    </motion.div>
-                                </motion.div>
-
-                                {/* Title tooltip */}
-                                <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 whitespace-nowrap z-10">
-                                    <div className="bg-black/80 backdrop-blur-md px-3 py-1 rounded-lg text-sm text-gold font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                                        {wish.title}
-                                    </div>
-                                </div>
-                            </motion.div>
-                        );
-                    })}
-
-                    {/* Selected wish — centered overlay */}
-                    <AnimatePresence mode="wait">
-                        {selectedWish && (
-                            <motion.div
-                                key={selectedWish.id}
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.9 }}
-                                transition={{ duration: 0.2 }}
-                                className="absolute inset-0 flex items-center justify-center pointer-events-none z-20"
-                            >
-                                <div className="bg-black/60 backdrop-blur-xl border border-white/20 rounded-3xl px-8 py-6 max-w-sm text-center shadow-[0_0_60px_rgba(212,175,55,0.15)]">
-                                    <p className={`text-xs font-semibold tracking-widest uppercase mb-2 bg-gradient-to-r ${selectedWish.color} bg-clip-text text-transparent`}>
-                                        {selectedWish.title}
-                                    </p>
-                                    <p className="text-white text-lg leading-relaxed font-serif italic">
-                                        {selectedWish.wish}
-                                    </p>
-                                </div>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                </div>
+                {/* Star count footer */}
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.6 }}
+                    className="text-center text-white/20 text-xs tracking-widest uppercase mt-8"
+                >
+                    {wishes.length} wishes · infinite love
+                </motion.p>
             </div>
+
+            {/* Modal */}
+            <AnimatePresence>
+                {selected && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setSelected(null)}
+                        className="fixed inset-0 z-50 flex items-center justify-center p-5"
+                        style={{ background: 'rgba(0,0,0,0.82)', backdropFilter: 'blur(16px)' }}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.88, opacity: 0, y: 20 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.88, opacity: 0, y: 20 }}
+                            transition={{ type: 'spring', stiffness: 300, damping: 28 }}
+                            onClick={(e) => e.stopPropagation()}
+                            className="relative max-w-sm w-full rounded-3xl overflow-hidden"
+                            style={{
+                                background: 'rgba(15,15,20,0.95)',
+                                border: '1px solid rgba(255,255,255,0.15)',
+                                boxShadow: `0 0 60px ${selected.glow}, 0 40px 80px rgba(0,0,0,0.7)`,
+                            }}
+                        >
+                            {/* Gradient top bar */}
+                            <div className={`h-1 w-full bg-gradient-to-r ${selected.color}`} />
+
+                            {/* Glow blob */}
+                            <div
+                                className="absolute top-0 right-0 w-48 h-48 rounded-full blur-3xl opacity-20 pointer-events-none"
+                                style={{ background: selected.glow }}
+                            />
+
+                            <div className="relative z-10 p-7 flex flex-col items-center text-center gap-5">
+                                {/* Icon */}
+                                <div
+                                    className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${selected.color} flex items-center justify-center`}
+                                    style={{ boxShadow: `0 0 30px ${selected.glow}` }}
+                                >
+                                    {(() => { const Icon = selected.icon; return <Icon className="w-8 h-8 text-white" />; })()}
+                                </div>
+
+                                {/* Title */}
+                                <p className={`text-xs font-bold tracking-widest uppercase bg-gradient-to-r ${selected.color} bg-clip-text text-transparent`}>
+                                    {selected.title}
+                                </p>
+
+                                {/* Wish */}
+                                <p className="text-white text-lg leading-relaxed font-serif italic">
+                                    "{selected.wish}"
+                                </p>
+
+                                {/* Close */}
+                                <button
+                                    onClick={() => setSelected(null)}
+                                    className="mt-1 px-7 py-3 rounded-full font-semibold text-sm transition-all duration-200"
+                                    style={{
+                                        background: `linear-gradient(135deg, ${selected.glow.replace('0.35', '0.6')}, transparent)`,
+                                        border: '1px solid rgba(255,255,255,0.15)',
+                                        color: '#fff',
+                                    }}
+                                >
+                                    Close
+                                </button>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     );
 };
