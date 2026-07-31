@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, Sparkles, Heart, Home, Plane, Camera, Coffee, Music, Sunrise, Moon } from 'lucide-react';
+import { Star, Sparkles, Heart, Home, Plane, Camera, Coffee, Music, Sunrise, Moon, X } from 'lucide-react';
 
 const WishesWall = () => {
     const [selectedWish, setSelectedWish] = useState(null);
@@ -97,86 +97,74 @@ const WishesWall = () => {
         }
     };
 
-    const WishCard = ({ wish, index }) => {
-        const Icon = wish.icon;
-        return (
-            <motion.div
-                key={wish.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.08 }}
-                onClick={() => setSelectedWish(selectedWish?.id === wish.id ? null : wish)}
-                className="cursor-pointer group"
-            >
-                <div
-                    className={`relative rounded-2xl border border-white/10 p-4 flex items-start gap-3 transition-all duration-300 hover:border-white/25 hover:bg-white/10 ${
-                        selectedWish?.id === wish.id ? 'bg-white/10 border-white/25' : 'bg-white/5'
-                    }`}
-                    style={{
-                        backdropFilter: 'blur(10px)',
-                        boxShadow: selectedWish?.id === wish.id
-                            ? '0 0 25px rgba(212,175,55,0.15)'
-                            : '0 0 10px rgba(0,0,0,0.3)',
-                    }}
-                >
-                    {/* Icon */}
-                    <div className={`flex-shrink-0 w-11 h-11 rounded-xl bg-gradient-to-br ${wish.color} flex items-center justify-center`}
-                        style={{ boxShadow: '0 0 15px rgba(212,175,55,0.25)' }}
-                    >
-                        <Icon className="w-5 h-5 text-white" />
-                    </div>
-
-                    {/* Text */}
-                    <div className="flex-1 min-w-0">
-                        <p className={`text-xs font-semibold tracking-widest uppercase mb-1 bg-gradient-to-r ${wish.color} bg-clip-text text-transparent`}>
-                            {wish.title}
-                        </p>
-                        <AnimatePresence>
-                            {selectedWish?.id === wish.id && (
-                                <motion.p
-                                    initial={{ opacity: 0, height: 0 }}
-                                    animate={{ opacity: 1, height: 'auto' }}
-                                    exit={{ opacity: 0, height: 0 }}
-                                    transition={{ duration: 0.25 }}
-                                    className="text-white/80 text-sm leading-relaxed font-serif italic overflow-hidden"
-                                >
-                                    {wish.wish}
-                                </motion.p>
-                            )}
-                        </AnimatePresence>
-                        {selectedWish?.id !== wish.id && (
-                            <p className="text-white/30 text-xs truncate">{wish.wish}</p>
-                        )}
-                    </div>
-                </div>
-            </motion.div>
-        );
-    };
-
     return (
-        <section className="py-20 px-4 relative z-10 min-h-screen flex items-center">
+        <section className="py-16 px-4 relative z-10">
             <div className="max-w-7xl mx-auto w-full">
+                {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
-                    className="text-center mb-12"
+                    className="text-center mb-10"
                 >
                     <h2 className="text-4xl md:text-5xl font-serif mb-4 text-white">
                         Our Wishes Wall
                     </h2>
-                    <p className="text-gray-400 text-lg">
+                    <p className="text-gray-400 text-base md:text-lg">
                         Every star holds a dream we'll make come true together
                     </p>
                 </motion.div>
 
-                {/* ── Mobile: card grid ── */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:hidden">
-                    {wishes.map((wish, index) => (
-                        <WishCard key={wish.id} wish={wish} index={index} />
-                    ))}
+                {/* ── Mobile: 2-column card grid ── */}
+                <div className="grid grid-cols-2 gap-3 md:hidden">
+                    {wishes.map((wish, index) => {
+                        const Icon = wish.icon;
+                        const isSelected = selectedWish?.id === wish.id;
+                        return (
+                            <motion.div
+                                key={wish.id}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.4, delay: index * 0.07 }}
+                                onClick={() => setSelectedWish(isSelected ? null : wish)}
+                                className="cursor-pointer"
+                            >
+                                <div
+                                    className={`rounded-2xl border p-3 flex flex-col gap-2 transition-all duration-300 ${
+                                        isSelected
+                                            ? 'border-white/30 bg-white/12'
+                                            : 'border-white/10 bg-white/5'
+                                    }`}
+                                    style={{
+                                        backdropFilter: 'blur(10px)',
+                                        boxShadow: isSelected
+                                            ? '0 0 25px rgba(212,175,55,0.2)'
+                                            : '0 0 10px rgba(0,0,0,0.3)',
+                                    }}
+                                >
+                                    {/* Icon row */}
+                                    <div className="flex items-center gap-2">
+                                        <div
+                                            className={`flex-shrink-0 w-9 h-9 rounded-xl bg-gradient-to-br ${wish.color} flex items-center justify-center`}
+                                            style={{ boxShadow: '0 0 12px rgba(212,175,55,0.25)' }}
+                                        >
+                                            <Icon className="w-4 h-4 text-white" />
+                                        </div>
+                                        <p className={`text-[10px] font-bold tracking-widest uppercase bg-gradient-to-r ${wish.color} bg-clip-text text-transparent leading-tight`}>
+                                            {wish.title}
+                                        </p>
+                                    </div>
+
+                                    {/* Wish text — always shown on mobile */}
+                                    <p className="text-white/60 text-xs leading-relaxed font-serif italic">
+                                        {wish.wish}
+                                    </p>
+                                </div>
+                            </motion.div>
+                        );
+                    })}
                 </div>
 
                 {/* ── Desktop: constellation ── */}

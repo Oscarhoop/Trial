@@ -37,7 +37,7 @@ const MemoryTimeline = () => {
             id: 4,
             date: 'Present & Beyond',
             title: 'Together, Always',
-            description: 'Through every twist and turn, you are my constant. Happy Girlfriend\'s Day to the love of my life.',
+            description: "Through every twist and turn, you are my constant. Happy Girlfriend's Day to the love of my life.",
             icon: Calendar,
             color: 'from-emerald-500 to-teal-500',
             cardIcon: Infinity
@@ -45,9 +45,9 @@ const MemoryTimeline = () => {
     ];
 
     return (
-        <section className="py-20 px-4 relative z-10">
+        <section className="py-16 px-4 relative z-10">
             <motion.h2
-                className="text-4xl md:text-5xl font-serif text-center mb-16"
+                className="text-4xl md:text-5xl font-serif text-center mb-12 md:mb-16"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -55,9 +55,55 @@ const MemoryTimeline = () => {
                 Our Story, Page by Page
             </motion.h2>
 
-            <div className="max-w-5xl mx-auto relative">
+            {/* ── Mobile layout: vertical timeline left-aligned ── */}
+            <div className="md:hidden max-w-lg mx-auto relative pl-10">
+                {/* Vertical line */}
+                <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-gold to-transparent" />
+
+                {memories.map((memory, index) => {
+                    const Icon = memory.icon;
+                    return (
+                        <motion.div
+                            key={memory.id}
+                            className="relative mb-8 last:mb-0"
+                            initial={{ opacity: 0, x: -30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, margin: '-60px' }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                        >
+                            {/* Circle dot on the line */}
+                            <div className="absolute -left-[26px] top-5 flex items-center justify-center">
+                                <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${memory.color} flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.35)] flex-shrink-0`}>
+                                    <Icon className="w-5 h-5 text-white" />
+                                </div>
+                            </div>
+
+                            {/* Card */}
+                            <motion.div
+                                whileTap={{ scale: 0.98 }}
+                                onClick={() => setSelectedMemory(memory)}
+                                className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 cursor-pointer hover:bg-white/10 transition-all duration-300 shadow-[0_0_20px_rgba(212,175,55,0.08)]"
+                            >
+                                <div className="flex items-center gap-3 mb-2">
+                                    <div className={`p-2 rounded-xl bg-gradient-to-br ${memory.color} bg-opacity-20 flex-shrink-0`}>
+                                        <memory.cardIcon className="w-5 h-5 text-gold" />
+                                    </div>
+                                    <div>
+                                        <p className="text-xs text-gold font-semibold tracking-wider">{memory.date}</p>
+                                        <h3 className="text-lg font-serif text-white leading-tight">{memory.title}</h3>
+                                    </div>
+                                </div>
+                                <p className="text-gray-300 text-sm leading-relaxed">{memory.description}</p>
+                            </motion.div>
+                        </motion.div>
+                    );
+                })}
+            </div>
+
+            {/* ── Desktop layout: centered alternating timeline ── */}
+            <div className="max-w-5xl mx-auto relative hidden md:block">
                 {/* Timeline Line */}
-                <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-transparent via-gold to-transparent hidden md:block" />
+                <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-transparent via-gold to-transparent" />
 
                 {memories.map((memory, index) => {
                     const Icon = memory.icon;
@@ -66,8 +112,7 @@ const MemoryTimeline = () => {
                     return (
                         <motion.div
                             key={memory.id}
-                            className={`relative mb-16 md:mb-24 flex flex-col md:flex-row items-center ${isLeft ? 'md:flex-row-reverse' : ''
-                                }`}
+                            className={`relative mb-24 flex items-center ${isLeft ? 'flex-row-reverse' : 'flex-row'}`}
                             initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true, margin: '-100px' }}
@@ -75,12 +120,12 @@ const MemoryTimeline = () => {
                         >
                             {/* Content Card */}
                             <motion.div
-                                className={`w-full md:w-5/12 ${isLeft ? 'md:text-right' : 'md:text-left'}`}
+                                className={`w-5/12 ${isLeft ? 'text-right' : 'text-left'}`}
                                 whileHover={{ scale: 1.05 }}
                                 onClick={() => setSelectedMemory(memory)}
                             >
                                 <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 cursor-pointer hover:bg-white/10 transition-all duration-300 shadow-[0_0_30px_rgba(212,175,55,0.1)]">
-                                    <div className="flex items-center gap-4 mb-4">
+                                    <div className={`flex items-center gap-4 mb-4 ${isLeft ? 'flex-row-reverse' : ''}`}>
                                         <div className={`p-3 rounded-xl bg-gradient-to-br ${memory.color} bg-opacity-20 flex-shrink-0`}>
                                             <memory.cardIcon className="w-8 h-8 text-gold" />
                                         </div>
@@ -101,7 +146,7 @@ const MemoryTimeline = () => {
 
                             {/* Center Icon */}
                             <motion.div
-                                className="my-4 md:my-0 md:absolute md:left-1/2 md:transform md:-translate-x-1/2"
+                                className="absolute left-1/2 transform -translate-x-1/2"
                                 whileHover={{ scale: 1.2, rotate: 360 }}
                                 transition={{ type: 'spring', stiffness: 260 }}
                             >
@@ -129,7 +174,7 @@ const MemoryTimeline = () => {
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.8, opacity: 0 }}
                             onClick={(e) => e.stopPropagation()}
-                            className="bg-gradient-to-br from-wine/80 to-midnight/80 backdrop-blur-xl border-2 border-gold/50 rounded-3xl p-8 max-w-lg w-full relative overflow-hidden"
+                            className="bg-gradient-to-br from-wine/80 to-midnight/80 backdrop-blur-xl border-2 border-gold/50 rounded-3xl p-6 md:p-8 max-w-lg w-full relative overflow-hidden"
                         >
                             {/* Confetti effect */}
                             <div className="absolute inset-0 pointer-events-none">
@@ -137,11 +182,7 @@ const MemoryTimeline = () => {
                                     <motion.div
                                         key={i}
                                         className="absolute w-2 h-2 bg-gold rounded-full"
-                                        initial={{
-                                            x: '50%',
-                                            y: '50%',
-                                            opacity: 1
-                                        }}
+                                        initial={{ x: '50%', y: '50%', opacity: 1 }}
                                         animate={{
                                             x: `${Math.random() * 100}%`,
                                             y: `${Math.random() * 100}%`,
@@ -153,12 +194,12 @@ const MemoryTimeline = () => {
                             </div>
 
                             <div className="text-center relative z-10 flex flex-col items-center">
-                                <div className={`p-4 rounded-2xl bg-gradient-to-br ${selectedMemory.color} bg-opacity-20 inline-flex mb-6`}>
-                                    <selectedMemory.cardIcon className="w-12 h-12 text-gold" />
+                                <div className={`p-4 rounded-2xl bg-gradient-to-br ${selectedMemory.color} bg-opacity-20 inline-flex mb-5`}>
+                                    <selectedMemory.cardIcon className="w-10 h-10 md:w-12 md:h-12 text-gold" />
                                 </div>
                                 <p className="text-gold font-semibold mb-2">{selectedMemory.date}</p>
-                                <h3 className="text-3xl font-serif mb-4 text-white">{selectedMemory.title}</h3>
-                                <p className="text-gray-200 text-lg leading-relaxed mb-6">
+                                <h3 className="text-2xl md:text-3xl font-serif mb-4 text-white">{selectedMemory.title}</h3>
+                                <p className="text-gray-200 text-base md:text-lg leading-relaxed mb-6">
                                     {selectedMemory.description}
                                 </p>
                                 <button
