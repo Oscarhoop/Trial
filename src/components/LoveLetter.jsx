@@ -15,7 +15,7 @@ const LoveLetter = () => {
                     <h2 className="text-3xl md:text-4xl font-serif mb-8 text-white/90">My Heart's Truth</h2>
                     <div className="space-y-6 text-lg md:text-xl text-gray-300 leading-relaxed font-light tracking-wide font-serif">
                         <p>
-                            Babe, from our days in high school to right now, you have been my constant. You are my long-time friend, my lover, and my person. We've had our ups and downs, even spent years apart, but the universe always finds a way to bring us back together at the end of it all.
+                            Babe, from our days in high school to right now, you have been my constant. You are my long time friend, my lover, and my person. We've had our ups and downs, even spent years apart, but the universe always finds a way to bring us back together at the end of it all.
                         </p>
                         <p>
                             I don't just love you for who you are, but for who I am when I'm with you. We've proven that no matter how much time passes or what life throws at us, you will always be closer to me than my own heartbeat.
